@@ -28,7 +28,7 @@ public class BulldogActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.vote_button);
         realm = Realm.getDefaultInstance();
 
-        Log.v("Hello", "World");
+        Log.v("hi", "there");
 
         String id = (String) getIntent().getStringExtra("bulldog");
         Bulldog bulldog = realm.where(Bulldog.class).equalTo("id", id).findFirst();
