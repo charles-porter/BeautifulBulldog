@@ -36,11 +36,14 @@ public class BulldogListFragment extends Fragment {
         BulldogArrayAdapter adapter = new BulldogArrayAdapter(this.getActivity(), mainActivity.realm.where(Bulldog.class).findAll());
         bulldogList.setAdapter(adapter);
 
-        bulldogList.setOnItemClickListener((adapterView, view, i, l) -> {
-            final Bulldog bulldog = (Bulldog) adapterView.getItemAtPosition(i);
-            Intent intent = new Intent(view.getContext(), BulldogActivity.class);
-            intent.putExtra("bulldog", bulldog.getId());
-            startActivity(intent);
+        bulldogList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final Bulldog bulldog = (Bulldog) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(view.getContext(), BulldogActivity.class);
+                intent.putExtra("bulldog", bulldog.getId());
+                startActivity(intent);
+            }
         });
 
         return view;

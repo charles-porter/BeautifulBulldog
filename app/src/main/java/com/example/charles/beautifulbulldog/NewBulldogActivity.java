@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import io.realm.Realm;
 
 public class NewBulldogActivity extends AppCompatActivity {
-    private ImageView imageView;
+    private ImageButton imageButton;
     private EditText editText;
     private EditText editTexxt;
     private Button button;
@@ -24,12 +25,21 @@ public class NewBulldogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_bulldog);
 
-        imageView = (ImageView) findViewById(R.id.bulldog_image);
+        imageButton = (ImageButton) findViewById(R.id.bulldog_image);
         editText = (EditText) findViewById(R.id.bulldog_name);
         editTexxt = (EditText) findViewById(R.id.bulldog_age);
         button = (Button) findViewById(R.id.save_button);
         realm = Realm.getDefaultInstance();
 
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, 1);
+                }
+            }
+        });
     }
 
     @Override
@@ -38,17 +48,9 @@ public class NewBulldogActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            bulldogImageButton.setImageBitmap(imageBitmap);
+            imageButton.setImageBitmap(imageBitmap);
         }
     }
 
-    bulldogImageButton.setOnClickListener(new View.OnCLickLsitener() {
-        @Override
-                public void OnClick(View view) {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            if (takePictureIntent.resolveActivity(getPackageManager()) !=null) {
-                startActivityForResult(takePictureIntent, 1);
-            }
-        }
-    }
+
 }
