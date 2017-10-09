@@ -2,6 +2,7 @@ package com.example.charles.beautifulbulldog;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -26,6 +27,8 @@ public class BulldogActivity extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         button = (Button) findViewById(R.id.vote_button);
         realm = Realm.getDefaultInstance();
+
+        Log.v("Hello", "World");
 
         String id = (String) getIntent().getStringExtra("bulldog");
         Bulldog bulldog = realm.where(Bulldog.class).equalTo("id", id).findFirst();
