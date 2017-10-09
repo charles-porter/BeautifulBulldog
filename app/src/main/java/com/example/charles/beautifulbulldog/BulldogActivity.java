@@ -2,12 +2,18 @@ package com.example.charles.beautifulbulldog;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import io.realm.Realm;
 
 public class BulldogActivity extends AppCompatActivity {
     private TextView textView;
+    private ImageView imageView;
+    private Spinner spinner;
+    private Button button;
     private Realm realm;
 
     @Override
@@ -15,7 +21,10 @@ public class BulldogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bulldog);
 
-        textView = (TextView) findViewById(R.id.textView);
+        textView = (TextView) findViewById(R.id.bulldog_name);
+        imageView = (ImageView) findViewById(R.id.bulldog_image);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        button = (Button) findViewById(R.id.vote_button);
         realm = Realm.getDefaultInstance();
 
         String id = (String) getIntent().getStringExtra("bulldog");
